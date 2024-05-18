@@ -1,0 +1,16 @@
+{
+  "name": "ESTONIA method to learn Morse",
+  "short_name": "KochMorse",
+  "start_url": "/morse/koch.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#008040", 
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/logo.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ]
+}

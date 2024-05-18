@@ -1,0 +1,122 @@
+
+<!DOCTYPE HTML>
+<html lang="en">
+<head prefix="og: http://ogp.me/ns#">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="author" content="Elvis Pfützenreuter PU5EPX">
+<meta name="googlebot" content="index,follow">
+<meta name="msapplication-config" content="none">
+<meta property="fb:app_id" content="251041435431449" />
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="format-detection" content="telephone=no">
+<meta property="og:site_name" content="EPx">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://stendec.io/morse/estonia.html">
+<title>Koch method to learn Morse</title>
+<meta property="og:title" content="ESTONIA method to learn Morse">
+<link rel='manifest' href='koch.manifest.json'>
+<meta name='apple-mobile-web-app-status-bar' content='#008040'>
+<meta name='theme-color' content='#008040'>
+<script src='app.js'></script>
+<link rel=STYLESHEET href="arp.css" type="text/css">
+
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8K5ST051TB"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-8K5ST051TB');
+</script>
+
+
+<script type='text/javascript' src='jquery.js' defer></script>
+<script type='text/javascript' src='io.js' defer></script>
+</head>
+<body>
+
+    <div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v15.0&appId=251041435431449&autoLogAppEvents=1" nonce="AU6lVb9B"></script>
+    <div id=topbar><a class=noarrow href=/>
+<img id=topbaricon src=logobar.png alt="Site menu">
+</a>
+<span id=topbartext>
+Koch method to learn Morse</span>
+<div id=progressbar></div></div>
+<div id=body>
+<div id=bodyheader>
+<div id=bodyheader2>
+<div id=bodyicon>
+<a class=noarrow href=/>
+<img src=logo.png id=topicon alt="Site menu">
+</a>
+</div>
+<div id=bodyheader3>
+<div id=bodytitle><h2 class=title>Estonia method to learn Morse</h2>
+</div><div id=bodytitleindex>
+<a class=noarrow href=./koch.html>Koch</a></div>
+</div>
+</div>
+<div id=socialheader>
+</div>
+</div>
+
+<script defer type="text/javascript" src="morse.js"></script>
+<script defer type="text/javascript" src="diff.js"></script>
+<script defer type="text/javascript" src="estonia.js"></script>
+<p>
+The ESTONIA method is based on exposing the student to full-speed Morse from day one.
+The first lesson starts with just two characters, played in full speed. The student
+must "copy" them (i.e. writing them down or typing them, like in this page). Once 90% of the
+characters are correctly "copied", the student can go move to the next lesson, where just one
+more character is added.
+
+<p>
+<input id=tone value=0 style="width: 5em" onchange="config_params();"> Hz tone<br>
+<input id=wpm value=0  style="width: 5em" onchange="config_params();"> words per minute<br>
+<input id=farns value=0  style="width: 5em" onchange="config_params();"> words per minute<br>
+<input id=volume value=0 style="width: 5em" onchange="config_params();"> % volume<br>
+
+<p>
+Lesson
+<select id=lesson style="width: 18em" onchange="config_params();">
+</select>
+<p>
+<span style="font-size: 75%">Click or touch any letter to see and listen the respective Morse code</span>
+<br>
+<span id=characters style="font-family: Courier, Monospace; font-size: 115%">c h a r</span>
+<p>
+<button onclick="play_button();" id=button>Start lesson</button> and type chars below, or
+<button onclick="cancel_button();" id=cancelbutton>Cancel lesson</button>
+<br>
+<textarea rows=5 cols=30 id=input style="font-family: monospace; font-size: 150%" wrap=soft autocomplete="off" spellcheck="false"></textarea>
+<br>
+<span id=results style="font-family: Courier, Monospace; font-size: 150%">
+Press Start button
+</span>
+
+<p>
+The Morse parameters are suggestions that happened to work well for me. You can play
+with parameters in this page or in the <a href="/morse">Web Morse player.</a>
+
+<p>
+After lesson 39, there are two "post-training" or maintenance lessons that you can use
+to try different speeds, or just not to forget the Morse code. The option "Post-training: all chars"
+creates a lesson with all possible characters guaranteedly included, just like lesson 39.
+The option "Post-training: mostly letters" reduces the frequency of punctuation and numeric symbols to
+better represent the real-world frequency of characters.
+<div class=clearer></div>
+<div id='comment-main'>
+<div id='comment-inner'>
+</div>
+</div>
+<!-- matched --></div>
+<div id=footer>
+This is the STENDEC Info portal. <a rel=author href="mailto:stendec@stendec.io">Contact us.</a> &nbsp;&nbsp;
+</div>
+</body></html>
