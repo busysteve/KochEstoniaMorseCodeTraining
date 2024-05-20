@@ -183,7 +183,7 @@ function make_audio_samples()
 	cfg['durationw'] = interword_duration;
 }
 
-function config(freq, volume, wpm, farns, dash, interbit, intersymbol, interword)
+function config(freq, volume, qrn_volume, wpm, farns, dash, interbit, intersymbol, interword)
 {
 	/*
 	Configure Morse code sound and rhythm.
@@ -227,6 +227,7 @@ function config(freq, volume, wpm, farns, dash, interbit, intersymbol, interword
 	cfg['w'] = interword;
 	cfg['freq'] = freq;
 	cfg['volume'] = volume;
+	cfg['qrn_volume'] = qrn_volume;
 
 	make_audio_samples();
 }
@@ -354,7 +355,7 @@ function start_schedule(end_cb)
 function start_filter()
 {
 	setup_filter();
-	a.filter_volume = cfg["volume"];
+	a.filter_volume = cfg["qrn_volume"];
 }
 
 function stop_filter()
