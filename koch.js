@@ -109,6 +109,9 @@ function config_params()
 	if (! memory.volume) {
 		memory.volume = 25;
 	}
+	if (! memory.qrn_volume) {
+		memory.qrn_volume = 25;
+	}
 	if (! memory.wpm) {
 		memory.wpm = 12;
 	}
@@ -133,6 +136,13 @@ function config_params()
 		volume = memory.volume;
 	}
 
+	var qrn_volume_el = document.getElementById("qrn_volume");
+	var qrn_volume = parseFloat(qrn_volume_el.value);
+	if (! qrn_volume || volume > 100 || qrn_volume <= 0) {
+		qrn_volume_el.value = memory.qrn_volume;
+		qrn_volume = memory.qrn_volume;
+	}
+
 	var wpm_el = document.getElementById("wpm");
 	var wpm = parseFloat(wpm_el.value);
 	if (! wpm || wpm > 100 || wpm < 1) {
@@ -153,7 +163,7 @@ function config_params()
 	var lesson = parseInt(document.getElementById("lesson").value);
 
 	save_memory({"lesson": lesson, "wpm": wpm, "farns": farns,
-			"volume": volume, "tone": tone});
+			"volume": volume, "qrn_volume": qrn_volume, "tone": tone});
 
 	lesson = Math.min(koch_lessons, lesson);
 
@@ -207,6 +217,7 @@ function config_params()
 	configs['wpm'] = wpm;
 	configs['farns'] = farns;
 	configs['volume'] = volume;
+	configs['qrn_volume'] = qrn_volume;
 	configs['tone'] = tone;
 }
 
@@ -220,7 +231,7 @@ function _play(s, cb, initial_delay)
 		bad_browser();
 		return;
 	}
-	config(configs['tone'], configs['volume'] / 100, configs['wpm'],
+	config(configs['tone'], configs['volume'] / 100, configs['qrn_volume'] / 100, configs['wpm'],
 		configs['farns'], 3, 0.6, 2, 3);
 
 	gen_timeline(a.morse[1], initial_delay);
