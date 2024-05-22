@@ -122,6 +122,14 @@ function config_params()
 		memory.lesson = "1";
 	}
 
+	if( memory.scorecard === undefined ) {
+		memory.scorecard = "";
+	}
+
+	var scorecard_el = document.getElementById("scorecard");
+	scorecard_el.value = decodeURIComponent(memory.scorecard);
+	scorecard = decodeURIComponent(memory.scorecard);
+
 	var tone_el = document.getElementById("tone");
 	var tone = parseFloat(tone_el.value);
 	if (! tone || tone < 20 || tone > 22000) {
@@ -162,8 +170,10 @@ function config_params()
 	}
 	var lesson = parseInt(document.getElementById("lesson").value);
 
-	save_memory({"lesson": lesson, "wpm": wpm, "farns": farns,
+	save_memory("koch",{"lesson": lesson, "wpm": wpm, "farns": farns,
 			"volume": volume, "qrn_volume": qrn_volume, "tone": tone});
+
+	save_memory("kochscore", encodeURIComponent(scorecard) );
 
 	lesson = Math.min(koch_lessons, lesson);
 
@@ -462,6 +472,37 @@ function diagnostics()
 	var hitrate = 1 - (Math.max(added_nosp, removed_nosp) / tot_nosp);
 
 	results.insertBefore(document.createElement('br'), results.firstChild);
+	
+	
+	var tmp = recover_memory();
+	
+	//document.getElementById("lesson").value
+	var sc = document.getElementById("scorecard");
+	var testtime = new Date();
+	var scard = testtime.toLocaleString() + " | Lesson " + tmp.lesson + ": " + Math.floor(hitrate * 100) + "% @" + tmp.wpm + " wpm with " + tmp.farns + " wpm Farns\n" + sc.value;
+	
+	sc.value = scard;
+	
+	save_memory("koch", {"lesson": tmp.lesson, "wpm": tmp.wpm, "farns": tmp.farns,
+		"volume": tmp.volume, "qrn_volume": tmp.qrn_volume, "tone": tmp.tone});
+
+	var scorecard_en = encodeURIComponent(scard);
+	
+	if( scorecard_en.length > 4000 )
+	{
+		for( i=scard.length - 3; i > 2000; i-- )
+		{
+			if( scard[i] == '\n' )
+			{
+				scard = scard.substring(0,i-1);
+				scorecard_en = encodeURIComponent(scard);
+				break;
+			}
+		}
+	}
+	
+	save_memory("kochscore", scorecard_en );
+	
 	var msgtext = "" + Math.floor(hitrate * 100) + "% correct";
 	if (hitrate > 0.9 && lesson < koch_lessons) {
 		msgtext += " - moving to next lesson";
@@ -476,15 +517,23 @@ function diagnostics()
 	results.insertBefore(msg, results.firstChild);
 }
 
-function save_memory(params)
+function save_memory(cookie, params)
 {
 	var expires = new Date();
 	expires.setTime(expires.getTime() + 30*24*60*60*1000);
 	// timezone irrelevant
-	var sm = "koch=";
-	for (var nam in params) {
-		if (typeof params[nam] !== "function") {
-			sm += nam + ":" + params[nam] + " ";
+	
+	if( cookie == "kochscore" )
+	{
+		var sm = "kochscore=" + params;
+	}
+	else
+	{
+		var sm = cookie + "=";
+		for (var nam in params) {
+			if (typeof params[nam] !== "function") {
+				sm += nam + ":" + params[nam] + " ";
+			}
 		}
 	}
 	sm += "; expires=" + expires.toGMTString() + "; path=/";
@@ -507,16 +556,25 @@ function recover_memory()
 		}
 		cv[0] = trim(cv[0]);
 		cv[1] = trim(cv[1]);
-		if (cv[0] != 'koch') {
+		if (cv[0] != 'koch' && cv[0] != 'kochscore') {
 			continue;
 	        }
-		var sm = cv[1].split(' ');
-		for (var e = 0; e < sm.length; ++e) {
-			var smpair = sm[e].split(':');
-			if (smpair.length == 2) {
-				mem[smpair[0]] = smpair[1];
+	        
+	        if( cv[0] == 'koch' )
+	        {
+			var sm = cv[1].split(' ');
+			for (var e = 0; e < sm.length; ++e) {
+				var smpair = sm[e].split(':');
+				if (smpair.length == 2) {
+					mem[smpair[0]] = smpair[1];
+				}
 			}
 		}
+		else if( cv[0] == 'kochscore' )
+		{
+			mem["scorecard"] = cv[1];
+		}
+		
 	}
 
 	return mem;
