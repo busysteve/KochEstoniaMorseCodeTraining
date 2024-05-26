@@ -229,6 +229,10 @@ function config_params()
 	configs['volume'] = volume;
 	configs['qrn_volume'] = qrn_volume;
 	configs['tone'] = tone;
+	
+	
+	do_score_graph();
+	
 }
 
 function _play(s, cb, initial_delay)
@@ -503,6 +507,10 @@ function diagnostics()
 	
 	save_memory("kochscore", scorecard_en );
 	
+	
+	do_score_graph();
+	
+	
 	var msgtext = "" + Math.floor(hitrate * 100) + "% correct";
 	if (hitrate > 0.9 && lesson < koch_lessons) {
 		msgtext += " - moving to next lesson";
@@ -516,6 +524,76 @@ function diagnostics()
 	msg.style.color = 'cyan';
 	results.insertBefore(msg, results.firstChild);
 }
+
+
+function do_score_graph()
+{
+	// Parse scard for scoring chart
+	var sc = document.getElementById("scorecard");
+	var sp = document.getElementById("scoreparse");
+	var splitscore = sc.value.split("\n");
+	const scores = [];
+	for( s=0; s<splitscore.length; s++ )
+	{
+		var parts = splitscore[s].split(" ");
+		var lsn = parts[5].substring(0,parts[5].length-1);
+		var prc = parts[6].substring(0,parts[6].length-1);
+		var wp = parts[7].substring(1);
+		var fn = parts[10];
+		var val = ( fn * wp ) * (prc / 100) * lsn;
+		scores[s] = val;
+ 		sp.value = sp.value + prc + " " + wp + " " + fn + " " + val + "\n";
+	}
+	
+	var min
+	var max
+	
+	
+	for( m=0; m < scores.length; m++ )
+	{
+		if( m == 0 )
+		{
+			min = scores[m];
+			max = scores[m];
+		}
+		else
+		{
+			min = scores[m] < min ? scores[m] : min;
+			max = scores[m] > max ? scores[m] : max;
+		}
+	}
+
+	const normscores = [];
+
+	for( n=0; n < scores.length; n++ )
+	{
+		normscores[n] = ( scores[n] - min ) / ( max - min );
+	}
+		
+	const chart = document.getElementById("scorechart");
+	const ctx = chart.getContext("2d");
+	
+	// Define a new path
+	ctx.beginPath();
+	ctx.lineStyle = "green";
+	
+	
+	nlen = normscores.length;
+	for( d=nlen-1; d>=0; d-- )
+	{
+		// Set a start-point
+		ctx.moveTo((nlen-d)*5,100-normscores[d]*100);
+
+		// Set an end-point
+		ctx.lineTo(((nlen-d)-1)*5,100-normscores[d+1]*100);
+
+		// Draw it
+		ctx.strokeStyle = "#119911";
+		ctx.stroke();
+	}
+
+}
+
 
 function save_memory(cookie, params)
 {
