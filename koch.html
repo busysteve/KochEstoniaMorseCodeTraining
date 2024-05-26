@@ -4,6 +4,7 @@
 <head prefix="og: http://ogp.me/ns#">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="author" content="Elvis Pfützenreuter PU5EPX">
+<!--
 <meta name="googlebot" content="index,follow">
 <meta name="msapplication-config" content="none">
 <meta property="fb:app_id" content="251041435431449" />
@@ -24,7 +25,7 @@
 <link rel=STYLESHEET href="arp.css" type="text/css">
 
 
-<!-- Google tag (gtag.js) -->
+<! -- Google tag (gtag.js) -- >
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-8K5ST051TB"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -33,7 +34,9 @@
 
   gtag('config', 'G-8K5ST051TB');
 </script>
-
+-->
+<script src='app.js'></script>
+<link rel=STYLESHEET href="arp.css" type="text/css">
 
 <script type='text/javascript' src='jquery.js' defer></script>
 <script type='text/javascript' src='io.js' defer></script>
@@ -43,7 +46,7 @@
     <div id="fb-root"></div>
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v15.0&appId=251041435431449&autoLogAppEvents=1" nonce="AU6lVb9B"></script>
     <div id=topbar><a class=noarrow href=/>
-<img id=topbaricon src=/logobar.png alt="Site menu">
+<img id=topbaricon src=./logobar.png alt="Site menu">
 </a>
 <span id=topbartext>
 Koch method to learn Morse</span>
@@ -52,8 +55,8 @@ Koch method to learn Morse</span>
 <div id=bodyheader>
 <div id=bodyheader2>
 <div id=bodyicon>
-<a class=noarrow href=/>
-<img src=logo.png id=topicon alt="Site menu">
+<a class=noarrow href=./>
+<!--img src=logo.png id=topicon alt="Site menu"-->
 </a>
 </div>
 <div id=bodyheader3>
@@ -103,18 +106,29 @@ Press Start button
 
 <br>
 <br>
+Score Chart
+<br>
+<canvas id="scorechart" width="200" height="100" style="border:1px solid #999999;">
+Sorry, your browser does not support canvas.
+</canvas>
+<br>
+<br>
 
 Score Card
 <br>
-<textarea rows=40 cols=64 id=scorecard style="font-family: monospace; font-size: 90%" wrap=soft autocomplete="off" spellcheck="false"></textarea>
+<textarea rows=40 cols=64 id=scorecard style="font-family: monospace; font-size: 80%" wrap=soft autocomplete="off" spellcheck="false"></textarea>
+<br>
+
+<br>
+<textarea rows=40 cols=64 id=scoreparse style="font-family: monospace; font-size: 80%" wrap=soft autocomplete="off" spellcheck="false"></textarea>
 <br>
 
 
-<p>
+<!--p>
 The Morse parameters are suggestions that happened to work well for me. You can play
 with parameters in this page or in the <a href="/morse">Web Morse player.</a>
 
-<p>
+<p-->
 After lesson 39, there are two "post-training" or maintenance lessons that you can use
 to try different speeds, or just not to forget the Morse code. The option "Post-training: all chars"
 creates a lesson with all possible characters guaranteedly included, just like lesson 39.
